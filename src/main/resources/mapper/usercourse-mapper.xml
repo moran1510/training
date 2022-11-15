@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tms.training.dao.UserCourseMapper">
+
+    <sql id="insertFields">
+        user_id, course_id,join_time
+    </sql>
+
+    <sql id="selectFields">
+        id,user_id, course_id, join_time,score,evaluate
+    </sql>
+
+    <select id="findUserCourseByUserId" resultType="UserCourse">
+        select <include refid="selectFields"></include>
+        from user_course
+        where user_id = #{userId}
+        limit #{offset},  #{limit}
+    </select>
+
+    <select id="findUserCourseByCourseId" resultType="UserCourse">
+        select <include refid="selectFields"></include>
+        from user_course
+        where course_id = #{courseId}
+        limit #{offset},  #{limit}
+    </select>
+
+    <select id="findUserCourse" resultType="UserCourse">
+        select <include refid="selectFields"></include>
+        from user_course
+        where course_id = #{courseId} and  user_id = #{userId}
+    </select>
+
+    <insert id="insertUserCourse" parameterType="UserCourse">
+        insert into user_course(<include refid="insertFields"></include>)
+        value(#{userId},#{courseId},#{joinTime})
+    </insert>
+
+    <update id="updateScore">
+        update user_course set score = #{score} ,evaluate= #{evaluate} where user_id = #{userId} and course_id = #{courseId}
+    </update>
+
+    <delete id="deleteCourse">
+        delete from user_course where user_id = #{userId} and course_id = #{courseId}
+    </delete>
+
+    <select id="DoingCourseCount" resultType="int">
+        select count(a.id)
+        from training_course a right join user_course b on a.id = b.course_id
+        where a.status=1
+        <if test="userId!=0">
+            and b.user_id = #{userId}
+        </if>
+    </select>
+
+    <select id="AllCourseCount" resultType="int">
+        select count(a.id)
+        from training_course a right join user_course b on a.id = b.course_id
+        where a.status!=3
+        <if test="userId!=0">
+            and b.user_id = #{userId}
+        </if>
+    </select>
+
+    <select id="selectTrainingCourseRows" resultType="int">
+        select count(id)
+        from training_course
+        where status != 3
+        <if test="userId!=0">
+            and user_id = #{userId}
+        </if>
+    </select>
+</mapper>

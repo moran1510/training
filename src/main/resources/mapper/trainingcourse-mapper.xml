@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tms.training.dao.TrainingCourseMapper">
+
+    <sql id="selectFields">
+        id, user_id, title, content, type, status, create_time, start_time,end_time,people_count, score
+    </sql>
+
+    <sql id="insertFields">
+        user_id, title, content, type, status, create_time, start_time,end_time,people_count, score
+    </sql>
+
+    <select id="selectTrainingCourse" resultType="TrainingCourse">
+        select <include refid="selectFields"></include>
+        from training_course
+        where status != 3
+        <if test="userId!=0">
+            and user_id = #{userId}
+        </if>
+        order by type desc, create_time desc
+        <if test="limit!=-2">
+            limit #{offset},  #{limit}
+        </if>
+
+    </select>
+
+    <select id="selectTrainingCourseWithStatus" resultType="TrainingCourse">
+        select <include refid="selectFields"></include>
+        from training_course
+        where status = #{status}
+        <if test="userId!=0">
+            and user_id = #{userId}
+        </if>
+        order by type desc, create_time desc
+        limit #{offset},  #{limit}
+    </select>
+
+    <select id="selectTrainingCourseRows" resultType="int">
+        select count(id)
+        from training_course
+        where status != 3
+        <if test="userId!=0">
+            and user_id = #{userId}
+        </if>
+    </select>
+
+    <select id="findTrainingCourseRowsWithStatus" resultType="int">
+        select count(id)
+        from training_course
+        where status = 1
+        <if test="userId!=0">
+            and user_id = #{userId}
+        </if>
+    </select>
+
+    <insert id="insertTrainingCourse" parameterType="TrainingCourse">
+        insert into training_course(<include refid="insertFields"></include>)
+        value(#{userId},#{title},#{content},#{type},#{status},#{createTime},#{startTime},#{endTime},#{peopleCount},#{score})
+    </insert>
+
+    <select id="selectTrainingCourseById" resultType="TrainingCourse">
+        select <include refid="selectFields"></include>
+        from training_course
+        where id = #{id}
+    </select>
+
+    <update id="updatePeopleCount">
+        update training_course set people_count = #{peopleCount} where id = #{id}
+    </update>
+
+    <update id="updateStatus">
+        update training_course set status = #{status} where id = #{id}
+    </update>
+
+    <select id="searchTrainingCourse" resultType="TrainingCourse">
+        select <include refid="selectFields"></include>
+        from training_course
+        where status != 3 and title like #{search}
+        <if test="userId!=0">
+            and user_id = #{userId}
+        </if>
+        order by type desc, create_time desc
+        <if test="limit!=-2">
+            limit #{offset},  #{limit}
+        </if>
+
+    </select>
+
+</mapper>

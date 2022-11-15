@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tms.training.dao.DiscussPostMapper">
+
+    <sql id="selectFields">
+        user_id, course_id, content,status, create_time, comment_count, score
+    </sql>
+
+    <sql id="insertFields">
+         user_id,course_id,content, status, create_time, comment_count, score
+    </sql>
+
+    <select id="selectDiscussPosts" resultType="DiscussPost">
+        select <include refid="selectFields"></include>
+        from discuss_post
+        where status != 1 and course_id = #{courseId}
+        order by create_time desc
+        limit #{offset},  #{limit}
+    </select>
+
+    <select id="selectDiscussPostRows" resultType="int">
+        select count(id)
+        from discuss_post
+        where status != 1 and course_Id = #{courseId}
+    </select>
+
+    <insert id="insertDiscussPost" parameterType="DiscussPost">
+        insert into discuss_post(<include refid="insertFields"></include>)
+        value(#{userId},#{courseId},#{content},#{status},#{createTime},#{commentCount},#{score})
+    </insert>
+
+    <select id="selectDiscussPostById" resultType="DiscussPost">
+        select <include refid="selectFields"></include>
+        from discuss_post
+        where course_id = #{courseId} and user_id = #{userId}
+    </select>
+
+    <update id="updateStatus">
+        update discuss_post set status = #{status} where course_id = #{courseId} and user_id = #{userId}
+    </update>
+
+
+</mapper>

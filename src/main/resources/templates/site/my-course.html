@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymleaf.org">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="icon" href="http://localhost:8080/training/header/3.png"/>
+	<link rel="stylesheet" href="//unpkg.com/layui@2.6.8/dist/css/layui.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" crossorigin="anonymous">
+	<link rel="stylesheet" th:href="@{/css/global.css}" />
+	<link rel="stylesheet" th:href="@{/css/course-detail.css}" />
+	<link rel="stylesheet" th:href="@{/css/hui.css}" />
+	<title>课程详情</title>
+</head>
+<body>
+	<div class="nk-container" >
+		<!-- 头部 -->
+		<header class="bg-dark sticky-top" th:replace="homepage::header">
+		</header>
+
+		<!-- 内容 -->
+		<div class="main">
+			<!-- 帖子详情 -->
+			<div class="container">
+				<!-- 头部  横线：border-bottom-->
+				<div class="media pb-1 border-bottom">
+					<a href="profile.html">
+						<img src="http://localhost:8080/training/header/3.png" class="align-self-start mr-4 rounded-circle user-header" alt="用户头像" >
+					</a>
+					<div class="media-body">
+						<!-- 标题 -->
+						<div class="mb-0 text" >
+								<span style="font-size: 25px" th:utext="${course.title}"></span>
+								<div class="float-right">
+									<input type="hidden" id="entityId" th:value="${course.id}">
+									<button type="button" th:class="|btn ${hasJoin?'btn-secondary':'btn-info'} btn-sm float-right mr-5 join-btn|"
+											th:text="${hasJoin?'取消报名':'报名课程'}" >我要报名</button>
+								</div>
+						</div>
+						<div class="text-muted">
+							<b th:utext="${user.username}"></b>
+							发布于
+							<b th:text="${#dates.format(course.createTime,'yyyy-MM-dd HH:mm:ss')}"></b>
+							<ul class="d-inline float-right">
+								<i class="layui-icon" style="color: darkorange" >&#xe756; <b th:text="${fire}">11</b></i>
+								<li class="d-inline ml-2">|</li>
+								<li class="d-inline ml-2"><a href="#replyform" class="text-primary">报名人数 <b th:text="${course.peopleCount}">7</b></a></li>
+							</ul>
+						</div>
+					</div>
+
+				</div>
+
+				<!-- 介绍 -->
+				<div class="mt-0 mb-3 content border-bottom" >
+					<div style="font-size: larger">课程介绍</div>
+						培训时间: <b th:text="${course.startTime}"></b> 至 <b th:text="${course.endTime}"></b>
+					<div th:text="${course.content}">
+					</div>
+				</div>
+				<div class="mt-0 mb-3 content border-bottom" >
+					<div><span class="label label-success radius">成绩</span>：<b  th:text="${score==-1?'暂无':score}"></b>
+						<button type="button" class="btn btn-info btn-sm float-right evaluate-btn" data-toggle="modal" data-target="#publishModal">评价</button>
+					</div>
+					<div><span class="label label-success radius">评价</span></div>
+					<div class="bk-gray radius" th:text="${evaluate==null?'暂无':evaluate}">
+					</div>
+				</div>
+				<div class="modal fade" id="publishModal" tabindex="-1" role="dialog" aria-labelledby="publishModalLabel" aria-hidden="true">
+					<div class="modal-dialog modal-lg" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="publishModalLabel">课程评价</h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body" a>
+								<form>
+									<div class="form-group">
+										<label for="message-evaluate" class="col-form-label">评价：</label>
+										<input type="hidden" id="courseId" th:value="${course.id}">
+										<textarea class="form-control" id="message-evaluate" rows="7"></textarea>
+									</div>
+								</form>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+								<button type="button" class="btn btn-primary" id="publishBtn">提交</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal fade" id="hintModal" tabindex="-1" role="dialog" aria-labelledby="hintModalLabel" aria-hidden="true">
+					<div class="modal-dialog modal-lg" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="hintModalLabel">提示</h5>
+							</div>
+							<div class="modal-body" id="hintBody">
+								发布完毕!
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+
+		<!-- 尾部 -->
+		<footer class="bg-dark" th:replace="homepage::end">
+		</footer>
+	</div>
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" crossorigin="anonymous"></script>
+	<script th:src="@{/js/global.js}"></script>
+	<script th:src="@{/js/myAllCourse.js}"></script>
+</body>
+</html>

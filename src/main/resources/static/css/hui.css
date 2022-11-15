@@ -1,0 +1,128 @@
+.commentList .item{list-style: none outside none;margin: 1.6rem 0 0}
+.commentList .avatar{border: 1px solid transparent;float: left}
+.comment-main{position:relative;margin-left:64px;border:1px solid #dedede;border-radius:2px}
+.comment-main:before,.comment-main:after{position:absolute;top:11px;left:-16px;right:100%;width:0;height:0;display:block;content:" ";border-color:transparent;border-style:solid solid outset;pointer-events:none}
+.comment-main:before{border-right-color:#dedede;border-width:8px}
+.comment-main:after{border-width:7px;border-right-color:#f8f8f8;margin-top:1px;margin-left:2px}
+.comment-header{padding:10px 15px;background:#f8f8f8;border-bottom:1px solid #eee}
+.comment-title{margin:0 0 8px 0;font-size:1.6rem;line-height:1.2}
+.comment-meta{font-size:13px;color:#999;line-height:1.2}
+.comment-meta a{color:#999}
+.comment-author{font-weight:700;color:#999}
+.comment-body{padding:15px;overflow:hidden}
+.comment-body>:last-child{margin-bottom:0}
+.commentList .comment-flip .avatar {float: right}
+.comment-flip .comment-main{margin-left: 0; margin-right: 64px}
+.comment-flip .comment-main:before {border-left-color: #dedede;border-right-color: transparent}
+.comment-flip .comment-main:before, .comment-flip .comment-main:after {left: 100%;position: absolute;right: -16px}
+.comment-flip .comment-main:after {border-left-color: #f8f8f8;border-right-color: transparent;margin-left: auto;margin-right: 2px}
+
+.label, .badge{display: inline-block;padding:2px 4px;font-size: 11.844px;font-weight: bold;line-height:14px;color: #fff;white-space: nowrap;vertical-align: baseline;background-color: #999}
+/*圆角*/
+.label.radius{border-radius: 3px}
+.badge{padding-right:9px;padding-left:9px;border-radius:9px}
+.label:empty, .badge:empty{display: none}
+a.label:hover, a.label:focus, a.badge:hover, a.badge:focus{color: #fff;text-decoration: none;cursor: pointer}
+
+/*默认*/
+.label-default, .badge-default{background-color: #e6e6e6; color:#333}
+.label-default[href], .badge-default[href]{background-color: #e6e6e6;color:#333}
+
+/*主要*/
+.label-primary, .badge-primary{background-color: #5a98de}
+.label-primary[href], .badge-primary[href]{background-color: #5a98de}
+
+/*主要*/
+.label-secondary, .badge-secondary{background-color: #3bb4f2}
+.label-secondary[href], .badge-secondary[href]{background-color: #3bb4f2}
+
+/*成功*/
+.label-success, .badge-success{background-color:#5eb95e}
+.label-success[href], .badge-success[href]{background-color: #5eb95e}
+
+/*警告*/
+.label-warning, .badge-warning{background-color: #f37b1d}
+.label-warning[href], .badge-warning[href]{background-color: #f37b1d}
+
+/*危险*/
+.label-danger, .badge-danger{background-color: #dd514c}
+.label-danger[href], .badge-danger[href]{background-color: #dd514c}
+
+.hui-panel {
+    background-color: #fff;
+    border: solid 1px transparent;
+}
+.hui-panel .hui-panel-header {
+    border-bottom: solid 1px transparent;
+    padding: 8px 15px;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: -1px;
+}
+.hui-panel .hui-panel-body {
+    padding: 15px;
+}
+.hui-panel .hui-panel-footer {
+    background-color: #f5f5f5;
+    border-top: 1px solid #ddd;
+    padding: 5px 20px;
+}
+.hui-panel.hui-panel-default {
+    border-color: #ddd;
+}
+.hui-panel.hui-panel-default > .hui-panel-header {
+    border-color: #ddd;
+    background-color: #f5f5f5;
+    color: #444;
+}
+.hui-panel.hui-panel-primary {
+    border-color: #5a98de;
+}
+.hui-panel.hui-panel-primary > .hui-panel-header {
+    border-color: #5a98de;
+    background-color: #5a98de;
+    color: #fff;
+}
+.hui-panel.hui-panel-secondary {
+    border-color: #3bb4f2;
+}
+.hui-panel.hui-panel-secondary > .hui-panel-header {
+    border-color: #3bb4f2;
+    background-color: #3bb4f2;
+    color: #fff;
+}
+.hui-panel.hui-panel-success {
+    border-color: #5eb95e;
+}
+.hui-panel.hui-panel-success > .hui-panel-header {
+    border-color: #5eb95e;
+    background-color: #5eb95e;
+    color: #fff;
+}
+.hui-panel.hui-panel-warning {
+    border-color: #f37b1d;
+}
+.hui-panel.hui-panel-warning > .hui-panel-header {
+    border-color: #f37b1d;
+    background-color: #f37b1d;
+    color: #fff;
+}
+.hui-panel.hui-panel-danger {
+    border-color: #dd514c;
+}
+.hui-panel.hui-panel-danger > .hui-panel-header {
+    border-color: #dd514c;
+    background-color: #dd514c;
+    color: #fff;
+}
+
+.c-white,.c-white a,a.c-white{color:white}
+.c-white a:hover,a.c-white:hover{color:white}
+
+.bk-gray{border:solid 1px #ddd}
+.radius{border-radius:4px; overflow:hidden}
+.size-MINI.radius{ border-radius:3px}
+.size-L.radius{ border-radius:5px}
+.size-XL.radius{ border-radius:6px}
+.round{border-radius:1000px; overflow:hidden}
+.circle{ border-radius:50%; overflow:hidden}

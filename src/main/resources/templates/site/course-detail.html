@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymleaf.org">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="icon" href="http://localhost:8080/training/header/3.png"/>
+	<link rel="stylesheet" th:href="@{/layui/css/layui.css}">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" crossorigin="anonymous">
+	<link rel="stylesheet" th:href="@{/css/global.css}" />
+	<link rel="stylesheet" th:href="@{/css/course-detail.css}" />
+	<link rel="stylesheet" th:href="@{/css/hui.css}" />
+	<title>课程详情</title>
+</head>
+<body>
+	<div class="nk-container" >
+		<!-- 头部 -->
+		<header class="bg-dark sticky-top" th:replace="homepage::header">
+		</header>
+
+		<!-- 内容 -->
+		<div class="main">
+			<!-- 帖子详情 -->
+			<div class="container">
+				<!-- 头部  横线：border-bottom-->
+				<div class="media pb-1 border-bottom">
+					<a href="profile.html">
+						<img src="http://localhost:8080/training/header/3.png" class="align-self-start mr-4 rounded-circle user-header" alt="用户头像" >
+					</a>
+					<div class="media-body">
+						<!-- 标题 -->
+						<div class="mb-0 text" >
+								<span style="font-size: 25px" th:utext="${course.title}"></span>
+								<div class="float-right">
+									<input type="hidden" id="entityId" th:value="${course.id}">
+									<button type="button" th:class="|btn ${hasJoin?'btn-secondary':'btn-info'} btn-sm float-right mr-5 join-btn|"
+											th:text="${hasJoin?'取消报名':'报名课程'}" th:if="${loginUser!=null&&loginUser.id!=user.id}">我要报名</button>
+								</div>
+						</div>
+						<div class="text-muted">
+							<b th:utext="${user.username}"></b>
+							发布于
+							<b th:text="${#dates.format(course.createTime,'yyyy-MM-dd HH:mm:ss')}"></b>
+							<ul class="d-inline float-right">
+								<i class="layui-icon" style="color: darkorange" >&#xe756; <b th:text="${fire}">11</b></i>
+								<li class="d-inline ml-2">|</li>
+								<li class="d-inline ml-2"><a href="#replyform" class="text-primary">报名人数 <b th:text="${course.peopleCount}">7</b></a></li>
+							</ul>
+						</div>
+					</div>
+
+				</div>
+
+				<!-- 介绍 -->
+				<div class="mt-0 mb-3 content border-bottom" >
+					<div style="font-size: larger">课程介绍</div>
+						培训时间: <b th:text="${course.startTime}"></b> 至 <b th:text="${course.endTime}"></b>
+					<div th:text="${course.content}">
+					</div>
+				</div>
+
+				<div class="position-relative">
+					<!-- 选项 -->
+					<ul class="nav nav-tabs mb-3">
+						<li class="nav-item">
+							<a class="nav-link position-relative active" href="my-create.html">评论 <span class="badge badge-info" th:text="${rows}">3</span></a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link position-relative " href="notice.html">提问 <span class="badge badge-info">27</span></a>
+						</li>
+					</ul>
+				</div>
+				<ul class="commentList ">
+					<li class="item cl" th:each="map:${discussPost}">
+						<a href="#">
+							<i class="avatar size-L radius">
+								<img th:src="${map.user.headerUrl}" class="mr-4 rounded-circle user-header" alt="用户头像" >
+							</i>
+						</a>
+						<div class="comment-main">
+							<header class="comment-header">
+								<div class="comment-meta">用户：<b class="comment-author" th:utext="${map.user.username}"> </b>
+									<b class="float-right" >评论于
+									<small th:text="${#dates.format(map.post.createTime,'yyyy-MM-dd HH:mm:ss')}">2019-04-25 15:49:32</small>
+									</b>
+								</div>
+							</header>
+							<div class="comment-body" th:utext="${map.post.content}">
+							</div>
+						</div>
+					</li>
+				</ul>
+				<!-- 分页 -->
+				<nav class="mt-5" th:replace="homepage::pagination">
+					<ul class="pagination justify-content-center">
+						<li class="page-item"><a class="page-link" href="#">首页</a></li>
+						<li class="page-item disabled"><a class="page-link" href="#">上一页</a></li>
+						<li class="page-item active"><a class="page-link" href="#">1</a></li>
+						<li class="page-item"><a class="page-link" href="#">2</a></li>
+						<li class="page-item"><a class="page-link" href="#">3</a></li>
+						<li class="page-item"><a class="page-link" href="#">4</a></li>
+						<li class="page-item"><a class="page-link" href="#">5</a></li>
+						<li class="page-item"><a class="page-link" href="#">下一页</a></li>
+						<li class="page-item"><a class="page-link" href="#">末页</a></li>
+					</ul>
+				</nav>
+
+
+			</div>
+
+		</div>
+
+		<!-- 尾部 -->
+		<footer class="bg-dark" th:replace="homepage::end">
+		</footer>
+	</div>
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" crossorigin="anonymous"></script>
+	<script th:src="@{/layui/layui.js}"></script>
+	<script th:src="@{/js/global.js}"></script>
+	<script th:src="@{/js/profile.js}"></script>
+</body>
+</html>

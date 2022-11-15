@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymleaf.org">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="icon" th:href="@{http://localhost:8080/training/header/3.png}"/>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" crossorigin="anonymous">
+	<link rel="stylesheet" th:href="@{/css/global.css}" />
+	<link rel="stylesheet" th:href="@{/css/letter.css}" />
+	<link rel="stylesheet" th:href="@{/css/hui.css}" />
+	<title>课程列表</title>
+</head>
+<body>
+	<div class="nk-container">
+		<!-- 头部 -->
+		<header class="bg-dark sticky-top" th:replace="homepage::header">
+		</header>
+
+		<!-- 内容 -->
+		<div class="main">
+			<div class="container">
+				<div class="position-relative">
+					<!-- 选项 -->
+					<span style="font-size: 25px" th:text="我的创建"></span>
+					<ul class="nav nav-tabs mb-3">
+						<li class="nav-item">
+							<a class="nav-link position-relative " th:href="@{/teacher/MyCreate}">进行中课程</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link position-relative active" th:href="@{/teacher/AllCreate}">全部课程</a>
+						</li>
+					</ul>
+				</div>
+
+				<!-- 提示框 -->
+				
+				<!-- 课程列表 -->
+				<ul class="list-unstyled">
+					<li class="media pb-2 pt-2 mb-1 border-bottom position-relative" th:each="map:${trainingCourse}">
+						<a href="profile.html">
+							<img src="http://localhost:8080/training/header/3.png" class="mr-4 rounded-circle user-header" alt="用户头像" >
+						</a>
+						<div class="media-body">
+							<h6 class="mt-1 mb-1">
+								<a class="text-success" th:text="${map.title}" th:href="@{|/teacher/courseDetail/${map.id}|}">闲人</a>
+								<span class="float-right text-muted font-size-12" >创建时间：<b th:text="${#dates.format(map.createTime,'yyyy-MM-dd HH:mm:ss')}"></b></span>							</h6>
+
+							<div th:switch="${map.status}">
+								<span class="label label-secondary radius" th:case="0">课程未开始</span>
+								<span class="label label-success radius" th:case="1">课程进行中</span>
+								<span class="label label-default radius" th:case="2">课程已结束</span>
+								<span th:case="*"></span>
+							</div>
+						</div>
+					</li>
+				</ul>
+				<!-- 分页 -->
+				<nav class="mt-5"  th:replace="homepage::pagination">
+					<ul class="pagination justify-content-center">
+						<li class="page-item"><a class="page-link" href="#">首页</a></li>
+						<li class="page-item disabled"><a class="page-link" href="#">上一页</a></li>
+						<li class="page-item active"><a class="page-link" href="#">1</a></li>
+						<li class="page-item"><a class="page-link" href="#">2</a></li>
+						<li class="page-item"><a class="page-link" href="#">3</a></li>
+						<li class="page-item"><a class="page-link" href="#">4</a></li>
+						<li class="page-item"><a class="page-link" href="#">5</a></li>
+						<li class="page-item"><a class="page-link" href="#">下一页</a></li>
+						<li class="page-item"><a class="page-link" href="#">末页</a></li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+
+		<!-- 尾部 -->
+		<footer class="bg-dark" th:replace="homepage::end">
+		</footer>
+	</div>
+
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" crossorigin="anonymous"></script>
+	<script th:src="@{/js/global.js}"></script>
+	<script th:src="@{/js/letter.js}"></script>
+</body>
+</html>
