@@ -120,7 +120,7 @@ public class TrainingCourseController implements CommunityConstant {
             }
         }
         model.addAttribute("discussPost",discussPost);
-
+        System.out.println("    1234     ");
         return "site/course-detail";
     }
 
